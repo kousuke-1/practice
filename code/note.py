@@ -108,6 +108,7 @@ if __name__ == "__main__":
     # img_np = np.array(img)  
     # individual_nc(img_np)
     
+    print("うんちなう")
 
     img = Image.open("Seg-11/seg_" + sys.argv[1]).convert("RGB")
     img_np = np.array(img)
