@@ -39,6 +39,7 @@ ssh -T git@github.com
 
 ##  リポジトリとか
 
+### リポジトリの作成
 1. GitHubリポジトリを作成
 (1) GitHubで新しいリポジトリを作成
 1.	GitHubにログインします。
@@ -60,11 +61,12 @@ git remote add origin git@github.com:your-username/my-project.git
 
 git remote -v でつながっているかの確認
 
+
+### 操作関係
 1. 必要なファイルをステージングする
 追跡したいファイルやフォルダをgit addでステージングします。
 •	個別にファイルを追加： 例：kojima/README.mdとds/だけを追跡したい場合：
-bash
-コードをコピーする
+
 git add kojima/README.md
 git add ds/
 •	一括でフォルダやファイルを追加： 必要なすべてのファイルを一括でステージングするには、次のコマンドを使います：
@@ -72,16 +74,14 @@ git add .
 ※ただし、追跡したくないファイルが混ざらないよう注意してください。
 2. ステージング内容を確認
 ステージング後に現在の状態を確認します：
-bash
-コードをコピーする
+
 git status
 •	緑色で表示されるファイルが次のコミットに含まれます。
 ________________________________________
 3. 無視したいファイルを除外
 追跡したくないファイルやフォルダを.gitignoreに追加して無視します。
 1.	.gitignoreの作成または編集：
-bash
-コードをコピーする
+
 nano .gitignore
 以下のように、追跡したくないファイルやフォルダを記載します：
 plaintext
@@ -99,7 +99,7 @@ bash
 git add .gitignore
 git commit -m "Add .gitignore to exclude unnecessary files"
 
-
+#### git branch -M main
 2. git branch -M mainの役割
 このコマンドは、現在のローカルブランチ名をmainに変更します。
 
@@ -111,6 +111,7 @@ git push -u origin main
 •  -u：ローカルブランチ（例：main）とリモートブランチ（例：origin/main）を対応付ける。
 •  初回のみ-uを使い、以降の操作を簡略化できる。
 
+####  git status
 git statusは、現在のリポジトリの状態を確認するためのコマンド
 •  表示例（変更が未ステージングの場合）：
 Changes not staged for commit:
@@ -131,7 +132,8 @@ Untracked files:
 •	意味：
 o	ファイルnew_file.txtはまだGitに登録されていない（追跡されていない）。
 
-流れ
+### ブランチ作成⇒コミットなどの流れ
+####  ブランチの作成・コミット
 1.	新しい作業（ブランチ）を作る：
 git checkout -b feature/add-login
 
@@ -151,6 +153,7 @@ o	作業ディレクトリの変更を元に戻して、変更を破棄する。
 
 変更が終わったらgit addからのgit commit -mでコミット
 
+####  ステージングとコミット
 (2) ブランチ切り替え時に変更をステージングまたはコミットする
 •	保存していない変更を反映させるには：
 1.	編集内容を保存。
@@ -165,11 +168,15 @@ git statusは、以下の情報を提供します：
 3.	ステージングされていない変更（作業ツリーで変更済みだがgit addされていないファイル）。
 4.	追跡されていないファイル（Gitが管理していない新しいファイル）。
 
-
+####  stashしてから退避
 (3) 編集内容を一時退避させる（git stashを使う）
 •	切り替え前に変更を一時的に退避させる：
 git stash
 •	他のブランチに切り替え後、退避した内容を戻す：
 git stash apply
+
+##### ブランチを移動するときの注意事項
+git checkoutをcommitかstashしてから行わないと、
+移動後のブランチで保存されるのでマジで注意！！！
 
 Mergeとgit rebase
