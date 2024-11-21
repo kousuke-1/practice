@@ -112,3 +112,4 @@ if __name__ == "__main__":
     img = Image.open("Seg-11/seg_" + sys.argv[1]).convert("RGB")
     img_np = np.array(img)
     conventional_nc(img_np)
+    print("うんち")
